@@ -54,7 +54,7 @@
 | **R13** | **Component spacing**：button group / form group 一律用 `gap-*`，禁止 `space-x-*` / `space-y-*` |
 | **R14** | **新代碼語言/框架選擇**：[依專案訂定，例如 "新 UI 一律 React + Base UI，不在 Vue 上加新功能"] |
 | **R15** | **Pre-PR Checklist**：`gh pr create` 前必須走過 `docs/pre-pr-checklist.md` |
-| **R16** | **前端設計鐵則**：所有前端產出必過 `docs/frontend-design-principles.md` —— **§A 普世核心**（刻意 > 出廠預設、token、a11y、動效、先研究、全狀態、響應式、複用）一律適用；**§B 美學 profile** 每專案挑一個（預設 `modern-SaaS-craft`） |
+| **R16** | **前端設計鐵則**：所有前端產出必過 `docs/frontend-design-principles.md` —— **§A 普世核心**（刻意 > 出廠預設、token、a11y、動效、先研究、全狀態、響應式、複用、文案）一律適用、**§C 設計流程迴圈**動手前先跑；**§B 美學 profile** 每專案挑一個（預設 `modern-SaaS-craft`） |
 
 ### 1.4 執行模式（autonomy level）
 

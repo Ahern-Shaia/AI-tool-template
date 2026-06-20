@@ -94,8 +94,9 @@ pnpm --dir frontend test
 
 ### Frontend / UI design
 
-- 任何前端產出（mockup / 元件 / 版面 / 樣式）動手前先過 [`docs/frontend-design-principles.md`](docs/frontend-design-principles.md)：**§A 普世核心**（刻意 > 出廠預設、token、a11y、動效、先研究、全狀態、響應式、複用）一律適用；**§B 美學 profile** 每專案挑一個（預設 `modern-SaaS-craft`）。
+- 任何前端產出（mockup / 元件 / 版面 / 樣式）動手前先過 [`docs/frontend-design-principles.md`](docs/frontend-design-principles.md)：**§A 普世核心**（刻意 > 出廠預設、token、a11y、動效、先研究、全狀態、響應式、複用、文案）一律適用、**§C 設計流程迴圈**動手前先跑；**§B 美學 profile** 每專案挑一個（預設 `modern-SaaS-craft`）。
 - 元件走語意 design token、禁硬編 hex；spacing 用 `gap-*`。產出後自問「這是不是出廠預設樣 / 有沒有貼品牌與 profile？」
+- **CSS specificity 陷阱**：type 選擇器（`.section`）與元素 / 類別選擇器（`.cta`）的 padding / margin 容易互相抵銷，section 之間尤其常見 —— 寫樣式時留意特異度，別讓規則彼此取消。
 
 ### Error Handling
 
