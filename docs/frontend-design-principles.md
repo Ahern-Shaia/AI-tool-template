@@ -2,7 +2,7 @@
 
 > 模板檔。任何前端產出（mockup / 元件 / 版面 / 截圖 / 樣式）**動手前先過這份**。分兩層：
 > - **§A 普世核心** — 不分專案、不分風格，永遠適用（定義「什麼叫好」）。
-> - **§B 美學 profile** — 每個專案挑一個（或自訂），決定「哪一種好看」。預設 `modern-SaaS-craft`。
+> - **§B 美學 profile** — 決定「哪一種好看」。🔒 **本專案已鎖定 `modern-SaaS-craft`**（由 CLAUDE.md R16 強制，不可換）。
 >
 > 產出後自問：「這是不是出廠預設樣？有沒有貼這個專案的品牌與選定 profile？」
 
@@ -79,12 +79,15 @@
 
 ---
 
-## B. 美學 profile（每專案挑一個 / 自訂）
+## B. 美學 profile（本專案已鎖定）
 
+> 🔒 **本專案採用 `modern-SaaS-craft`（見 B0），不可換。** 由 CLAUDE.md R16 強制；任何前端產出一律以此為唯一美學依據。要改 profile 必須由人改本檔 + CLAUDE.md R16，並在 PR 說明理由 —— Claude Code 不得自行換 profile。
+> B1 其餘 profile **僅供 fork 此模板時參考 / 自訂用**，**不是本專案的可選項**。
+>
 > profile 決定密度、形狀語言、色彩性格、是否用漸層、深度（陰影）、字體性格、動效個性、avoid-list。
 > **換 profile 不影響 §A。** 一個 profile 至少定義這 8 項；正式採用前依 §A5 研究補齊。
 
-### B0. 預設 profile：`modern-SaaS-craft`（高質感儀表板）
+### B0. ✅ 本專案鎖定 profile：`modern-SaaS-craft`（高質感儀表板）
 適用：B2B / SaaS / dashboard / 數據密集工具。吸收 Linear / Stripe / Vercel-Geist / Radix / Raycast / Attio。
 - **密度**：偏高、資訊密、編輯級排版。
 - **色彩**：克制；**不用純黑 / 純灰**（帶色調 ink / hairline）；飽和色只點在重點。
@@ -95,7 +98,8 @@
 - **動效**：micro 100–150ms / enter 150–200ms / exit 更快；進 ease-out、出 ease-in。
 - **avoid-list（此 profile，會隨時間更新）**：通用置中孤卡、預設元件庫 demo 長相、紫漸層 / 發光、「**左色條 + 淡底 + 小 icon**」的樣板 alert、零層次。
 
-### B1. 其他 profile（用到再依 §A5 展開）
+### B1. 其他 profile（⚠️ 非本專案選項；僅 fork 模板時參考）
+> 本專案已鎖 B0，以下不適用於本專案，列出僅供日後 fork 此 starter 重訂 profile 時參考。
 只列「性格 + 對 B0 的關鍵差異」，採用前研究補齊：
 - **`playful-consumer`**（C 端 / 社群 / 兒童）：低密度、大圓角、**可用漸層 / 鮮色**、動效更彈跳有個性、插畫感。
 - **`editorial-content`**（內容 / 媒體 / 品牌站）：版面與字體主導、留白大、強對比標題、圖文節奏；元件感弱。
