@@ -21,6 +21,7 @@
 - ⭐ [Cross-cutting concern 必 sweep outer shell](rule_outer_shell_sweep.md) — permission / audit / i18n / observability 必把 sidebar / banner / route / layout 一起 sweep，不只 endpoint / button 層
 - [Commit message 格式](rule_commit_format.md) — `<type>(<scope>): <description>`；Co-Authored-By Claude 行**預設不加**（用戶明說要才加）
 - [全綠才算完成](rule_full_green_check.md) — 每 task 結束跑完整 format + lint + build + test，repeat lint 直到 0 issues
+- ⭐ [上 prod 前必做 FMEA 失效反思](rule_fmea_before_ship.md) — CLAUDE.md R17；逐路徑列失效→嚴重度（P0/P1/P2）→緩解，P0 未緩解不得上 prod；pre-mortem 心態，範本 _template.md §12
 - [修補 vs 重構決策架構](rule_refactor_vs_patch_decision.md) — 區分「設計缺陷 / sweep 紀律不夠 / 局部漏」三類；不要把任何反覆 BUG 都當設計缺陷要重構
 - ⭐ [前端設計鐵則](feedback_frontend_design_principles.md) — 所有前端產出必過；§A 普世核心（刻意 > 出廠預設 / token / a11y / 動效 / 先研究 / 全狀態 / 響應式 / 複用）+ §B 美學 profile（預設 modern-SaaS-craft）；詳 `docs/frontend-design-principles.md`
 

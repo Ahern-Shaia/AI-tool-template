@@ -204,6 +204,7 @@ Input validation：[列每個 user-supplied 欄位的 sanitization / max length 
 | **M2** ... | ... | 0.05 mo | ⏳ |
 | **M3** ... | ... | 0.02 mo | ⏳ |
 | **M4** docs + smoke | doc → v1.0 + MODULES.md → ✅ | 0.02 mo | ⏳ |
+| **M5** FMEA 收尾（R17）| 填 §12 失效場景反思（逐路徑 → 嚴重度 → 緩解）；P0 未緩解不得上 prod | 0.02 mo | ⏳ |
 
 ---
 
@@ -245,10 +246,40 @@ SELECT ...
 
 ---
 
-## 12. 變更紀錄
+## 12. 失效場景反思（FMEA）— 收尾必填（R17）
+
+> **何時填**：M4 收尾 / 標「完成」/ 上 prod **之前**（pre-mortem 心態：假設它會壞，反推哪裡壞）。
+> **怎麼填**：**逐路徑**列「失效模式 → 影響 → 嚴重度 → 緩解狀態」。不是只列你修好的，**已知殘留也要列**。
+> **嚴重度**：`P0` = 讓使用者**無法完成核心流程 / 資料毀損 / 跨租戶外洩**；`P1` = 資料髒 / 體驗差 / 可繞過；`P2` = 邊角。
+> **狀態**：✅ 已處理｜⚠️ 已知殘留（寫清楚為何可忍 + 治本方向）｜🔒 被外部 gate 擋（法律 / 第三方）。
+> **硬性 gate（R17）**：**任一 P0 未到 ✅ → 不得上 prod**。
+
+逐路徑（每個入口 / 外呼 / 狀態轉換 / 並發點各一小節）：
+
+### 12.1 [路徑名，例：API endpoint X]
+
+| # | 場景 | 行為 | 狀態 | Sev |
+|---|---|---|---|---|
+| X1 | [輸入非法 / 缺欄 / 並發 / 第三方 timeout / 部署順序…] | [系統回什麼] | ✅/⚠️/🔒 | P0/P1/P2 |
+
+### 12.2 部署順序（migration / 後端 / 前端）
+
+| # | 場景 | 風險 | 緩解 |
+|---|---|---|---|
+| D1 | 後端 code 先於 migration | 缺欄 → 需登入 API 全 500 | migration 必先（R10 人工跑 + 自查欄位） |
+
+### 12.3 不在本 module scope 修的 pre-existing 問題
+
+- [列出發現但刻意不修的既存問題 + 為何 out of scope + 該開哪張 ticket]
+
+> **檢查點**：上面所有 P0 是否都 ✅？否 → 回去修，不得標 SHIPPED。
+
+---
+
+## 13. 變更紀錄
 
 | 日期 | 版本 | 變更 | 作者 |
 |---|---|---|---|
 | YYYY-MM-DD | v0.1 | 初版 DRAFT — sub-task + OQ-[ABBR]-N | Claude Code |
 | YYYY-MM-DD | v0.2 | OQ-[ABBR]-1..N 全部裁定；狀態 DRAFT → APPROVED；進入 M1 | Claude Code |
-| YYYY-MM-DD | v1.0 | M1–M4 全部 SHIPPED；補 SOP；狀態 APPROVED → SHIPPED | Claude Code |
+| YYYY-MM-DD | v1.0 | M1–M5 全部 SHIPPED（含 §12 FMEA、P0 全清）；補 SOP；狀態 APPROVED → SHIPPED | Claude Code |

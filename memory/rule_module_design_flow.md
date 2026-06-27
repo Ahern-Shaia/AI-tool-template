@@ -31,6 +31,8 @@ type: feedback
 - 出現意外 scope（surfaced by build / smoke）— 就地修 + 在 commit message 註明 surfaced from
 
 **M(N+1) 收尾**：
+- **FMEA 失效場景反思（R17，[[rule_fmea_before_ship]]）**：逐路徑列失效模式 → 影響 → 嚴重度 →
+  緩解，填進 design doc §12；**任一 P0 未緩解不得標 SHIPPED / 上 prod**
 - design doc 狀態 `APPROVED → SHIPPED`，版本 → v1.0
 - 補 §SOP（操作指引 + 失敗模式 + 審計 SQL）
 - 補 §milestones 表的 commit hash
