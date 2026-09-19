@@ -46,7 +46,9 @@
 
 | **R18** | **資安基線第一天生效**：`docs/security-baseline.md` 全文是 P0 —— 注入面（值參數綁定、動態 identifier 白名單）、deny-by-default + object-level authz、JWT 硬化、**AI/LLM 載重不變量**（授權絕不由模型決定）、SSRF、secret redact、金額 decimal、audit 不可變、供應鏈門檻、CI gates。開工先寫 §0 威脅模型前三名。**測試不得用特權連線遮蔽安全機制**（superuser 讓 RLS/grant 不執法，少一條 grant 也是綠的） |
 
-> R17、R18 編在 §1.2（通用行為鐵則）而非 §1.3 —— 它們不依專案技術棧，不可砍。
+| **R19** | **前端改動的驗證迴圈**：`docs/frontend-testing.md` —— 用 Playwright 驅動**真實瀏覽器**走使用者流程（讀 a11y tree / DOM 為主），**在瀏覽器實際用過才算完成**；走通的流程**固化成 spec 進 CI**（AI 驅動只做探索不進 CI）；spec 要真的綠過一次再 commit。「渲染出來了」≠「操作得動」——schema / 渲染 / 可操作是三層 |
+
+> R17–R19 編在 §1.2（通用行為鐵則）而非 §1.3 —— 它們不依專案技術棧，不可砍。
 
 ### 1.3 程式碼層硬規則（依專案技術棧調整）
 

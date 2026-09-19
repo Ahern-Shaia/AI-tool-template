@@ -48,6 +48,12 @@
 - ⭐⭐ [「我方沒有 X」寫下來的當天可能就是錯的](pitfall_own_premise_stale.md) — 斷言要附查法(grep/檔/日期)
 - ⭐⭐ [特權測試連線會遮蔽安全機制](pitfall_privileged_test_lane_masks_security.md) — superuser 讓 RLS/grant 不執法;五綠而真請求 500;測試走 prod 同款低權車道
 - ⭐⭐ [綁了 tenant_id ≠ 有權存取這一筆](pitfall_tenant_scoped_is_not_authorized.md) — BOLA;測試至少兩位 actor;A 建 B 讀不到進 CI
+- ⭐⭐ [截圖看不出 variant](pitfall_screenshot_cannot_show_variant.md) — 設定看原始碼,溢出看截圖
+- ⭐⭐ [症狀對了歸因常沒有 —— 先量再修](pitfall_symptom_right_attribution_wrong.md) — 「不一樣」先量面與盒子,不是找缺件
+- ⭐⭐ [全套 e2e 一批紅先隔離重現](pitfall_e2e_batch_reds_isolate_first.md) — 45 紅剩 4 真紅;timedOut 與 failed 分開
+- ⭐⭐ [e2e 沿用了別人的 dev server](pitfall_e2e_reused_foreign_dev_server.md) — e2e 專屬 env 永遠 false;判別法一行 lsof
+- ⭐⭐ [git checkout -- . 毀掉未提交工作](pitfall_git_checkout_dot_destroys_work.md) — 清理預設跳過不是刪除
+- ⭐⭐ [「載入中」與「空的」長得一樣](pitfall_loading_looks_like_empty.md) — 四態分開;空狀態句子越具體越危險
 - [codegen 不一定重生所有衍生檔](pitfall_generated_files_not_regenerated.md) — 改 proto / IDL / schema 後別假設 generator 更新全部；凍結手維護的 generated 檔要 grep + 手 patch，別貿然開 `clean:true`
 - [嚴格 schema 的序列化欄位一壞炸整個 list](pitfall_serialized_column_breaks_whole_list.md) — JSONB strict unmarshal / protobuf 欄位一列壞炸整個列表；手 seed 要 field-by-field 對 schema，當心「看似 string 其實是物件 / enum / duration」的欄位
 - [建新 package / 目錄前先查路徑撞名](pitfall_package_path_collision.md) — design doc 路徑是建議不是契約；新建 `internal/X/` 前 `ls` + grep 名稱，撞到改用帶意圖的 sub-package

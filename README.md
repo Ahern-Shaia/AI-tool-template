@@ -19,6 +19,8 @@ claude-starter/
 ├── docs/
 │   ├── pre-dev-decisions.md    ← ⭐ 開工前決策清單(24 格,每格附真實專案的代價實證)
 │   ├── security-baseline.md    ← ⭐ 資安基線(P0 第一天生效;含 AI/LLM 載重不變量) (R18)
+│   ├── frontend-testing.md     ← ⭐ 前端真實操作驗證迴圈 + e2e 品質規則 (R19)
+│   ├── typescript-nestjs-rules.md ← 技術棧附件(TS 專案直接用,含 CI-fail 清單)
 │   ├── pre-pr-checklist.md     ← PR 前的人工檢查清單 (R15)
 │   ├── cleanup-plan.md         ← 收斂功能的批次計畫範本
 │   ├── frontend-design-principles.md ← 前端 §A 普世核心 + §B profile(開工時決定)

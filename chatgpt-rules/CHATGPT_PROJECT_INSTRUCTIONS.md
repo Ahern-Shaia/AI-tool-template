@@ -353,6 +353,28 @@ Licensing and supply chain:
 - Prod/dev is a property of the deploy script line, not of the manifest
   section. To know whether a package ships, read how the image installs.
 
+Frontend verification (see `docs/frontend-testing.md`):
+
+- A frontend change is done only after driving a REAL browser through the user
+  flow (Playwright; assert on a11y tree / DOM, screenshots as backup).
+  "It renders" is not "it can be operated": schema, render, and operability are
+  three layers, and the first two being green says nothing about the third.
+- Flows walked manually MUST be frozen into Playwright specs that run in CI —
+  and each spec MUST have passed at least once before commit. AI-driven browsing
+  is for exploration only, never in CI.
+- Every "it must block X" assertion needs its inverse ("legal X must pass") —
+  otherwise block-everything also goes green. Assert the number, not just the
+  keyword. Substring locators mis-hit; input values are properties that
+  `hasText` cannot read.
+- When a whole e2e suite goes red, isolate before diagnosing (45 reds once
+  reduced to 4 real ones); count timeouts separately from failures; check
+  whether the load is your own forgotten server, and whether the suite reused
+  a foreign dev server (its env vars silently never applied).
+- For layout complaints, measure surfaces and boxes first (background, box
+  layers, container width) side by side — "everything present but wrong-looking"
+  is more common than missing parts. Read source for settings, screenshots for
+  overflow: a screenshot cannot show a variant behind `disabled`.
+
 Security baseline (P0 from day one — see `docs/security-baseline.md` for the full list):
 
 - Bind every value as a parameter; dynamic identifiers (table/column names) MUST be
