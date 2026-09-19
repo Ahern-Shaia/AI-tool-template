@@ -57,6 +57,3 @@
 - [codegen 不一定重生所有衍生檔](pitfall_generated_files_not_regenerated.md) — 改 proto / IDL / schema 後別假設 generator 更新全部；凍結手維護的 generated 檔要 grep + 手 patch，別貿然開 `clean:true`
 - [嚴格 schema 的序列化欄位一壞炸整個 list](pitfall_serialized_column_breaks_whole_list.md) — JSONB strict unmarshal / protobuf 欄位一列壞炸整個列表；手 seed 要 field-by-field 對 schema，當心「看似 string 其實是物件 / enum / duration」的欄位
 - [建新 package / 目錄前先查路徑撞名](pitfall_package_path_collision.md) — design doc 路徑是建議不是契約；新建 `internal/X/` 前 `ls` + grep 名稱，撞到改用帶意圖的 sub-package
-
-### External / reference
-- [Project Brain MCP](reference_brain.md) — `.brain/` 已內建（如有），任務開始 `get_context`、任務完成 `complete_task`、發現 Pitfall / Rule / Decision 即 `add_knowledge`

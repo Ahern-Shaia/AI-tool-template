@@ -38,8 +38,7 @@ claude-starter/
 │   ├── rule_module_design_flow.md        ← 模組設計流程
 │   ├── rule_cross_cutting_checks.md      ← ⭐ Security/Observability/Cost/Compat 四檢
 │   ├── rule_commit_format.md             ← Commit message 格式
-│   ├── rule_full_green_check.md          ← 全綠才算完成
-│   └── reference_brain.md                ← Project Brain MCP
+│   └── rule_full_green_check.md          ← 全綠才算完成
 └── setup.sh                    ← 部署腳本
 ```
 
@@ -132,18 +131,6 @@ Claude Code 會（兩種 mode 都會）：
 2. 自動讀 `~/.claude/projects/<encoded>/memory/MEMORY.md`（每次 session 啟動）
 3. 任何 non-trivial 模組請求都會先寫 design doc
 4. 任何完成的 task 都會跑 format / lint / build / test
-
-## 進階：Project Brain (可選)
-
-如果想要 MCP knowledge graph：
-
-```bash
-# 在新專案 root
-git clone <project-brain-repo> .brain
-cp ~/.claude/CLAUDE.md ./.claude/  # 教 Claude 用 brain MCP
-```
-
-詳見 `memory/reference_brain.md`。
 
 ## 版本
 
