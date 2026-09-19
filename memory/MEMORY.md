@@ -35,6 +35,17 @@
 - [ROI 評估必納 ops + governance 成本](feedback_roi_include_ops_governance.md) — 評估遷移 / 重構 / vendor / 模型替換不能只算直接金流；要算 ops 痛 / 中斷風險 / 合規 / lock-in
 
 ### Pitfalls（通用踩坑 — 改 schema / codegen / 建 package 前重讀）
+- ⭐⭐ [量測腳本自己會錯,而且是安靜的](pitfall_measurement_script_is_silently_wrong.md) — 探針回「看起來很正常的數字」;自檢要陽性+陰性對照;一面倒的結果特別可疑;截斷處看起來像清單結尾
+- ⭐⭐ [規則寫了沒檢查就會漂](pitfall_rule_without_check_always_drifts.md) — 禁令與檢查同 commit;突變要模擬「只漏改一處」且先 diff -q
+- ⭐⭐ [檢查存在,但不在會跑的那一組裡](pitfall_check_exists_but_never_runs.md) — 四種形狀;「CI 會抓到」在每日排程下 = 明天才抓到
+- ⭐⭐ [出貨了但沒有人呼叫它](pitfall_shipped_but_never_called.md) — 表/服務/測試都在;出貨前 grep 呼叫端
+- ⭐⭐ [索引比權威舊,而索引是自動載入的那一份](pitfall_index_stale_auto_loaded.md) — 引數字前開權威檔;規則進門檻、數字別進註解
+- ⭐⭐ [貼出從未跑過的 tool 輸出](pitfall_fabricated_tool_output.md) — 看到 no visible output 整輪作廢
+- ⭐⭐ [zsh 不對變數做分詞](pitfall_zsh_word_split.md) — 症狀「No files were processed」/ 時間戳相同
+- ⭐⭐ [背景測試說綠,而它中途斷了](pitfall_background_test_reads_green.md) — 三個訊號都可能是假的;判別法 Running N 對 N passed
+- ⭐⭐ [寫註解本身會弄壞檔案](pitfall_comment_syntax_breaks_file.md) — JSX 裸註解印上畫面;同名錨在 CSS 與 JS 各一個 ⇒ 錨要驗唯一
+- ⭐⭐ [兩種查法都用同一個人的詞,不算兩種](pitfall_two_lookups_same_words.md) — 先懂那功能是什麼,再用自己的概念找
+- ⭐⭐ [「我方沒有 X」寫下來的當天可能就是錯的](pitfall_own_premise_stale.md) — 斷言要附查法(grep/檔/日期)
 - [codegen 不一定重生所有衍生檔](pitfall_generated_files_not_regenerated.md) — 改 proto / IDL / schema 後別假設 generator 更新全部；凍結手維護的 generated 檔要 grep + 手 patch，別貿然開 `clean:true`
 - [嚴格 schema 的序列化欄位一壞炸整個 list](pitfall_serialized_column_breaks_whole_list.md) — JSONB strict unmarshal / protobuf 欄位一列壞炸整個列表；手 seed 要 field-by-field 對 schema，當心「看似 string 其實是物件 / enum / duration」的欄位
 - [建新 package / 目錄前先查路徑撞名](pitfall_package_path_collision.md) — design doc 路徑是建議不是契約；新建 `internal/X/` 前 `ls` + grep 名稱，撞到改用帶意圖的 sub-package

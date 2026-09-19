@@ -38,7 +38,7 @@
 | 規則 | 說明 |
 |---|---|
 | **R6** | Claude Code **不得自行決定架構**。重要設計（資料模型、API 介面、狀態機）**必須先寫設計文件、由人 review 後再實作**（用 `docs/modules/<module>.md` 模板）|
-| **R7** | Claude Code 在不確定時**必須停下來問**，不可猜測。例外：使用者明確說「全部由你決定」時，可在已宣告的範圍內裁定 |
+| **R7** | Claude Code 在不確定時**必須停下來問**，不可猜測。例外：使用者明確說「全部由你決定」時，可在已宣告的範圍內裁定。⚠️ **execution 檔位是開工前的決定**（`docs/pre-dev-decisions.md` §四）——成熟後常演化成「研究錨定的建議＝已核准，一氣呵成」；但研究能推翻的是產品裁定，**不能推翻安全底線與不可逆動作的確認義務** |
 | **R8** | **每個 task 完成後必須跑完整測試 + lint + build**，全綠才算完成 |
 | **R9** | **不得使用 `--no-verify` 跳過 git hook**；不得用 `git push -f` 推 main 分支 |
 | **R10** | 涉及生產環境的任何操作（部署、執行 SQL、資料變更）**必須由人手動執行**，Claude Code 只能產生指令，不能直接執行 |
@@ -57,7 +57,7 @@
 | **R13** | **Component spacing**：button group / form group 一律用 `gap-*`，禁止 `space-x-*` / `space-y-*` |
 | **R14** | **新代碼語言/框架選擇**：[依專案訂定，例如 "新 UI 一律 React + Base UI，不在 Vue 上加新功能"] |
 | **R15** | **Pre-PR Checklist**：`gh pr create` 前必須走過 `docs/pre-pr-checklist.md` |
-| **R16** | **前端設計鐵則**：所有前端產出必過 `docs/frontend-design-principles.md` —— **§A 普世核心**（刻意 > 出廠預設、token、a11y、動效、先研究、全狀態、響應式、複用、文案）一律適用、**§C 設計流程迴圈**動手前先跑；**§B 美學 profile 本專案鎖定 `modern-SaaS-craft`，不可換**。Claude Code 不得自行改用其他 profile（playful / editorial / minimal / brutalist 等）；要換必須由人改本鐵則 + `docs/frontend-design-principles.md` §B，並於 PR 說明理由 |
+| **R16** | **前端設計鐵則**：所有前端產出必過 `docs/frontend-design-principles.md` **§A 普世核心**（token、a11y、全狀態、響應式、複用、文案）+ **§C 設計流程迴圈**。🔴 **§B 美學 profile 於開工時決定**（見 `docs/pre-dev-decisions.md` §二）——profile 的正確來源是**目標使用者的母心智模型與競品實測**，不是預設鎖一個名字（2026-09 更新：前一版鎖 `modern-SaaS-craft`，在一個 B2B 表單專案被實戰推翻 —— 那個 profile 與使用者要的「紙的形狀」全面相反）。定了之後 Claude Code 不得自行換；要換由人改本鐵則並說明理由 |
 
 ### 1.4 執行模式（autonomy level）
 
