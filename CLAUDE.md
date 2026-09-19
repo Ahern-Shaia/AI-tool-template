@@ -44,7 +44,9 @@
 | **R10** | 涉及生產環境的任何操作（部署、執行 SQL、資料變更）**必須由人手動執行**，Claude Code 只能產生指令，不能直接執行 |
 | **R17** | **功能標「完成」或上 prod 前，必須產出 FMEA 失效場景反思** — 逐路徑（每個入口 / 外呼 / 狀態轉換 / 並發點 / 部署順序）列「失效模式 → 影響 → 嚴重度（P0/P1/P2）→ 緩解狀態（✅/⚠️ 殘留/🔒 外部 gate）」，寫進 design doc 固定章節（範本見 `docs/modules/_template.md`「失效場景反思（FMEA）」段）。**任一 P0 未緩解不得上 prod**；已知殘留也要列（為何可忍 + 治本方向）。無 design doc 的小改動 / hotfix 至少在回報中口頭列失效場景 + 緩解。心態 = pre-mortem（假設它已壞，反推為什麼），不是只測 happy path |
 
-> R17 編在 §1.2（通用行為鐵則）而非 §1.3 —— 它不依專案技術棧，不可砍。
+| **R18** | **資安基線第一天生效**：`docs/security-baseline.md` 全文是 P0 —— 注入面（值參數綁定、動態 identifier 白名單）、deny-by-default + object-level authz、JWT 硬化、**AI/LLM 載重不變量**（授權絕不由模型決定）、SSRF、secret redact、金額 decimal、audit 不可變、供應鏈門檻、CI gates。開工先寫 §0 威脅模型前三名。**測試不得用特權連線遮蔽安全機制**（superuser 讓 RLS/grant 不執法，少一條 grant 也是綠的） |
+
+> R17、R18 編在 §1.2（通用行為鐵則）而非 §1.3 —— 它們不依專案技術棧，不可砍。
 
 ### 1.3 程式碼層硬規則（依專案技術棧調整）
 

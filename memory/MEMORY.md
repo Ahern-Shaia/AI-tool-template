@@ -46,6 +46,8 @@
 - ⭐⭐ [寫註解本身會弄壞檔案](pitfall_comment_syntax_breaks_file.md) — JSX 裸註解印上畫面;同名錨在 CSS 與 JS 各一個 ⇒ 錨要驗唯一
 - ⭐⭐ [兩種查法都用同一個人的詞,不算兩種](pitfall_two_lookups_same_words.md) — 先懂那功能是什麼,再用自己的概念找
 - ⭐⭐ [「我方沒有 X」寫下來的當天可能就是錯的](pitfall_own_premise_stale.md) — 斷言要附查法(grep/檔/日期)
+- ⭐⭐ [特權測試連線會遮蔽安全機制](pitfall_privileged_test_lane_masks_security.md) — superuser 讓 RLS/grant 不執法;五綠而真請求 500;測試走 prod 同款低權車道
+- ⭐⭐ [綁了 tenant_id ≠ 有權存取這一筆](pitfall_tenant_scoped_is_not_authorized.md) — BOLA;測試至少兩位 actor;A 建 B 讀不到進 CI
 - [codegen 不一定重生所有衍生檔](pitfall_generated_files_not_regenerated.md) — 改 proto / IDL / schema 後別假設 generator 更新全部；凍結手維護的 generated 檔要 grep + 手 patch，別貿然開 `clean:true`
 - [嚴格 schema 的序列化欄位一壞炸整個 list](pitfall_serialized_column_breaks_whole_list.md) — JSONB strict unmarshal / protobuf 欄位一列壞炸整個列表；手 seed 要 field-by-field 對 schema，當心「看似 string 其實是物件 / enum / duration」的欄位
 - [建新 package / 目錄前先查路徑撞名](pitfall_package_path_collision.md) — design doc 路徑是建議不是契約；新建 `internal/X/` 前 `ls` + grep 名稱，撞到改用帶意圖的 sub-package

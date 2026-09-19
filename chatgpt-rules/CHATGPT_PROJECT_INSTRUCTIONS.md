@@ -353,6 +353,27 @@ Licensing and supply chain:
 - Prod/dev is a property of the deploy script line, not of the manifest
   section. To know whether a package ships, read how the image installs.
 
+Security baseline (P0 from day one — see `docs/security-baseline.md` for the full list):
+
+- Bind every value as a parameter; dynamic identifiers (table/column names) MUST be
+  validated against a metadata allowlist, then quoted, then run under a least-privilege
+  role. String concatenation into SQL is forbidden at every layer.
+- Deny by default. Tenant scoping is NOT authorization: also verify this actor may
+  touch this specific id (BOLA). Isolation tests ("A creates, B cannot read") run in CI,
+  with at least two actors — a single-actor test structurally cannot catch this.
+- Tests MUST NOT use privileged DB connections for security-sensitive services:
+  a superuser bypasses RLS and grants, so a missing grant stays green. Five green
+  integration tests once hid a 500 on the first real request.
+- AI/LLM invariants: model emits structured intent (never raw SQL/code) → deterministic
+  code compiles it against an allowlist → a permissioned human approves state changes
+  → audit. Authorization is NEVER decided by the model. User data is untrusted input
+  (indirect prompt injection); secrets/PII never enter prompts; LLM output is never
+  rendered unencoded or executed.
+- JWT: pass an algorithms allowlist, reject `alg:none`, verify exp/iss/aud. Money is
+  decimal, never float. Audit/ledger data is append-only — corrections are reversals.
+- Secrets never enter code or git, and are redacted from logs, error messages and
+  LLM prompts. Migration role is separate from the app role.
+
 User-facing text:
 
 - Error messages MUST tell a non-technical user what went wrong and what to do

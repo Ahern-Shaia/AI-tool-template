@@ -3,7 +3,7 @@
 把「careful, methodical commit style」的工作習慣帶到新專案的 starter template。
 
 > **2026-09 大更新**|從一個跑了三個月的真實產品專案(全 TS、solo + AI)回抽:
-> ① 新增 `docs/pre-dev-decisions.md` —— **開工前要決定的 24 件事**,每件附「先定受益/後補付代價」的實證
+> ① 新增 `docs/pre-dev-decisions.md` —— **開工前要決定的 25 件事**,每件附「先定受益/後補付代價」的實證
 > ② `AGENTS.md` 尾端新增〈通用鐵則〉—— 五站研究法、全稱詞差距表、規則與檢查同 commit、
 >    授權查證方法論(SPDX 不可信/禁競品條款)、量測自檢(陽陰對照)等,每條都付過代價
 > ③ `memory/` 新增 11 個通用 pitfall(量尺安靜地錯、檢查存在但沒人跑、出貨了沒人呼叫…)
@@ -18,6 +18,7 @@ claude-starter/
 ├── AGENTS.md                   ← Dev workflow 細節
 ├── docs/
 │   ├── pre-dev-decisions.md    ← ⭐ 開工前決策清單(24 格,每格附真實專案的代價實證)
+│   ├── security-baseline.md    ← ⭐ 資安基線(P0 第一天生效;含 AI/LLM 載重不變量) (R18)
 │   ├── pre-pr-checklist.md     ← PR 前的人工檢查清單 (R15)
 │   ├── cleanup-plan.md         ← 收斂功能的批次計畫範本
 │   ├── frontend-design-principles.md ← 前端 §A 普世核心 + §B profile(開工時決定)
