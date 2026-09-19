@@ -23,6 +23,8 @@ claude-starter/
 │   ├── frontend-design-principles.md ← 前端 §A 普世核心 + §B profile(開工時決定)
 │   └── modules/
 │       └── _template.md        ← 模組設計文件 (M0-M4 + OQ-N)
+├── chatgpt-rules/              ← ChatGPT / Codex 版規則(Claude 版的投影,同步方向單向)
+│   └── CHATGPT_PROJECT_INSTRUCTIONS.md  ← 可直接貼 Project Instructions 或併入 AGENTS.md
 ├── memory/                     ← 用戶層持久記憶 (跨 session)
 │   ├── MEMORY.md               ← 索引
 │   ├── user_role.md            ← 用戶 profile
