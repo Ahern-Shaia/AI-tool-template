@@ -1,0 +1,23 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  wiring:
+    name: 文件接線 + setup.sh 冒煙
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 鐵則引用的檔要存在、要真的會被部署、不得有孤兒、棧附件要進 STACK_FILES
+      - name: check-docs-wired
+        run: bash scripts/check-docs-wired.sh
+
+      - name: setup.sh syntax
+        run: bash -n setup.sh
+
+      # 技術棧偵測錯了不會報錯，只會讓某個專案永遠拿不到它的棧規則 —— 只有斷言抓得到
+      - name: smoke-setup
+        run: bash scripts/smoke-setup.sh

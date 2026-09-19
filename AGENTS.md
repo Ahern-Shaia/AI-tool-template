@@ -7,6 +7,17 @@ This file provides guidance to AI coding assistants when working with code in th
 - Migration files are in `[path]`
 - Files in `[path]` are mappings to the database tables
 
+## Baselines (read before writing code)
+
+- **Security floor** — [`docs/security-baseline.md`](docs/security-baseline.md): stack-agnostic, P0 from day one.
+- **Performance floor** — [`docs/performance-baseline.md`](docs/performance-baseline.md): its twin. Write §0 (p95 target / payload cap / outbound-call cap) before optimising anything.
+- **Stack attachment** — `docs/stack-rules/<stack>.md`: what those two floors look like *in this stack*.
+  No attachment for your stack yet → generate one against the fixed 16 dimensions in
+  [`docs/stack-rules/_generator.md`](docs/stack-rules/_generator.md), have a human review it, and add
+  its filename to `STACK_FILES` in `setup.sh` **in the same commit**.
+- Every rule in an attachment must name its enforcement point (config flag / lint rule / CI job / grep
+  guard). No enforcement point → it is a P2 convention, not a P0. A rule without a check always drifts.
+
 ## Development Workflow
 
 **ALWAYS follow these steps after making code changes:**

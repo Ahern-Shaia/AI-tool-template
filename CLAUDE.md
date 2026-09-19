@@ -48,11 +48,18 @@
 
 | **R19** | **前端改動的驗證迴圈**：`docs/frontend-testing.md` —— 用 Playwright 驅動**真實瀏覽器**走使用者流程（讀 a11y tree / DOM 為主），**在瀏覽器實際用過才算完成**；走通的流程**固化成 spec 進 CI**（AI 驅動只做探索不進 CI）；spec 要真的綠過一次再 commit。「渲染出來了」≠「操作得動」——schema / 渲染 / 可操作是三層 |
 
-> R17–R19 編在 §1.2（通用行為鐵則）而非 §1.3 —— 它們不依專案技術棧，不可砍。
+| **R20** | **效能地板第一天生效**：`docs/performance-baseline.md` 是 `security-baseline.md` 的雙生檔，同樣與技術棧無關 —— 量測先行（**量測腳本自己會錯而且是安靜的**，自檢要陽性＋陰性對照組）、N+1 與 query 數 assert、禁無上限查詢 / fan-out / 佇列、**每個外呼都要有 timeout**（多數 client 預設是無限等）、請求總預算、**快取 key 必須含租戶維度**（少一維不是效能問題是跨租戶洩漏）、只回需要欄位、重計算進背景、**連線池上限 × 實例數 < DB 上限**。開工先寫 §0 三個數字（p95 目標 / payload 上限 / 單請求外呼次數上限）並讓它們進 CI 門檻 |
+
+| **R21** | **技術棧規則附件**：開工確認技術棧後（`docs/pre-dev-decisions.md` §一 #5），必須挑一份 `docs/stack-rules/<stack>.md` 生效 —— 它寫的是「兩塊地板在這個棧上長什麼樣」。沒有現成附件的棧，照 `docs/stack-rules/_generator.md` 的**固定 16 維度**生成、由人 review 後才生效（自由生成的規則沒有分母，等於沒查）。🔴 **每條規則必須寫得出執法點**（設定旗標 / lint 規則 / CI job / grep 守衛）；寫不出執法點的不准掛 P0，降級成 P2 慣例 —— 規則沒有檢查一定會漂。新增附件要**同一個 commit**加進 `setup.sh` 的 `STACK_FILES`，`scripts/check-docs-wired.sh` 會擋 |
+
+> R17–R21 編在 §1.2（通用行為鐵則）而非 §1.3 —— 它們不依專案技術棧，不可砍。
+> 其中 R18（資安）/ R20（效能）是兩塊**與棧無關的地板**，R21 是把地板落到**你這個棧**的那一層。
 
 ### 1.3 程式碼層硬規則（依專案技術棧調整）
 
-> 這節是 starter 版本，依專案技術棧改寫 / 增刪 / 全砍。下面是常見規則範例：
+> 這節是**專案自己的**硬規則，依專案技術棧改寫 / 增刪 / 全砍。下面是常見規則範例。
+> ⚠️ 棧的通用規則不要抄進這裡 —— 那些在 `docs/stack-rules/<stack>.md`（R21）。
+> 這節只放「這個專案特有、附件不會有」的那幾條。
 
 | 規則 | 說明 |
 |---|---|
@@ -201,6 +208,12 @@ PR 內容必含：目的、變更內容、測試結果、影響範圍。
 | Pre-PR Checklist | `docs/pre-pr-checklist.md` |
 | Cleanup 收斂規劃 | `docs/cleanup-plan.md` |
 | 前端設計原則（核心 + 美學 profile） | `docs/frontend-design-principles.md` |
+| 前端驗證迴圈（真實瀏覽器） | `docs/frontend-testing.md` |
+| 開工前決策清單（25 格） | `docs/pre-dev-decisions.md` |
+| 資安地板（P0，與棧無關） | `docs/security-baseline.md` |
+| 效能地板（與棧無關） | `docs/performance-baseline.md` |
+| 技術棧規則附件 | `docs/stack-rules/<stack>.md` |
+| 沒有現成附件時的生成器規格 | `docs/stack-rules/_generator.md` |
 
 ---
 

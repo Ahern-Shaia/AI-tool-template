@@ -396,6 +396,39 @@ Security baseline (P0 from day one — see `docs/security-baseline.md` for the f
 - Secrets never enter code or git, and are redacted from logs, error messages and
   LLM prompts. Migration role is separate from the app role.
 
+Performance floor (stack-agnostic, day one — see `docs/performance-baseline.md`):
+
+- Write three numbers before any optimisation talk: p95 target (read / write / background),
+  max response payload, max outbound calls per request. Put them in CI as thresholds,
+  not on a wall as slogans. A threshold encodes the RULE (`p95 < 300ms`), never the
+  CURRENT NUMBER (`p95 < today's 287ms`) — the latter goes red on normal noise and
+  then gets loosened into meaninglessness.
+- Measurement scripts are wrong silently: probes return numbers that look perfectly
+  normal. Self-check with BOTH a positive and a negative control — a negative control
+  alone cannot catch "the probe never ran".
+- N+1 is the most common bottleneck and is invisible at dev-sized data. Assert the
+  QUERY COUNT in tests; code review does not catch it.
+- Every outbound call needs a timeout: most clients default to waiting forever, so
+  "unset" is not "a sensible default", it is betting the other side always answers.
+  One deadline per request, propagated; retries bounded, backed off, jittered, and
+  only for idempotent operations.
+- Cache keys MUST carry every authorization dimension (tenant / user / role). A missing
+  dimension is not a performance bug, it is cross-tenant disclosure. Write the
+  invalidation strategy before writing the cache.
+- No unbounded anything: queries, fan-out, queues. An unbounded queue trades latency
+  for OOM. Pool size × instance count must stay under the database connection limit.
+
+Stack rule attachment (`docs/stack-rules/<stack>.md`):
+
+- After the stack is confirmed, one attachment applies. It states what the two floors
+  above look like IN THAT STACK. No attachment yet → generate one against the fixed
+  16 dimensions in `docs/stack-rules/_generator.md` (S1–S8 security, P1–P8 performance),
+  then have a human review it. Freely-generated rules have no denominator: you cannot
+  tell what is missing. Every dimension needs a verdict — a rule, "covered by X in this
+  stack", or "not applicable + why". Blank is not a verdict.
+- Every rule names its enforcement point (config flag / lint rule / CI job / grep guard).
+  No enforcement point → it is a convention, not a P0. A rule without a check always drifts.
+
 User-facing text:
 
 - Error messages MUST tell a non-technical user what went wrong and what to do
